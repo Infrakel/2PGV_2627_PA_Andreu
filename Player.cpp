@@ -9,6 +9,14 @@ void Player::printPlayer() {
     printf("Speed: [%f]  |  Hp: [%d]  |  Gold: [%d] \n", speed, hp, gold);
 }
 
+void Player::printArmorStats() {
+    for (int i = 0; i < 10; i++) {
+        if (armors[i] != nullptr) {
+            printf("Armor stats: \n durability: [%d] \n damage reduction: [%f] \n", armors[i]->getDurability(), armors[i]->getDamageReduction());
+        }
+    }
+}
+
 void Player::increaseLife(int change) {
     hp = clamp(0, hp + change, maxHp);
 }
@@ -25,4 +33,22 @@ bool Player::spendMoney(int change) {
     if(gold-change < 0) return false;
     gold -= change;
     return true;
+}
+
+void Player::equipArmor(Armor armor_to_set) {
+
+    for (int i = 0; i < 10; i++) {
+        if (armors[i] == nullptr) {
+
+            armors[i] = new Armor(armor_to_set);
+            break;
+        }
+    }
+}
+
+void Player::unequipArmor(int slot_number) {
+
+    // delete first, then point to nullptr
+    delete armors[slot_number];
+    armors[slot_number] = nullptr;
 }

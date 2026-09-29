@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cassert>
 #include <string>
 #include "Player.hpp"
 
@@ -10,9 +11,9 @@ void Player::printPlayer() {
 }
 
 void Player::printArmorStats() {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < maxArmors; i++) {
         if (armors[i] != nullptr) {
-            printf("Armor stats: \n durability: [%d] \n damage reduction: [%f] \n", armors[i]->getDurability(), armors[i]->getDamageReduction());
+            printf("Armor stats: \n durability: [%f] \n damage reduction: [%f] position in elements: [%d] \n", armors[i]->getDurability(), armors[i]->getDamageReduction(), i);
         }
     }
 }
@@ -39,7 +40,7 @@ bool Player::spendMoney(int change) {
 
 void Player::equipArmor(Armor armor_to_set) {
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < maxArmors; i++) {
         if (armors[i] == nullptr) {
 
             armors[i] = new Armor(armor_to_set);
@@ -48,11 +49,35 @@ void Player::equipArmor(Armor armor_to_set) {
     }
 }
 
-void Player::unequipArmor(int slot_number) {
+void Player::reasignArmors(int slot_number) {
 
-    // delete first, then point to nullptr
+    // do it before logic to delete on memory
+    if (slot_number < 0) { return; }
+
+    // add logic to delete only
     delete armors[slot_number];
     armors[slot_number] = nullptr;
+    
+    for (int i = 0; i < maxArmors; i++) {
+
+        // i dont need to check if it is null because i dont care, i can just move the object between them
+        // if i do i - 1, there is a problem, i need to start on i = 1
+        armors[i] = armors[i + 1];
+        armors[i + 1] = nullptr;
+    }
+
+    /*for (int i = 1; i < maxArmors + 1; i++) {
+        armors[i - 1] = armors[i];
+        armors[i] = nullptr;
+    }*/
+}
+
+void Player::unequipArmor(int slot_number) {
+
+    assert(slot_number >= 0 && slot_number <= maxArmors);
+    assert(armors[slot_number] != nullptr);
+    // logic to cook something
+    reasignArmors(slot_number);
 }
 
 Armor* Player::getArmor(int slot) {

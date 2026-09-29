@@ -15,22 +15,41 @@ class Player {
         // armor settings
         void equipArmor(Armor armor_to_set);
         void unequipArmor(int slot_number);
+        void reasignArmors(int slot_number);
 
         Armor* getArmor(int slot);
 
-        Player(): 
-            x(0.0f),
-            y(0.0f),
-            speed(5.0f),
-            hp(100),
-            maxHp(100),
-            minSpeed(1),
-            maxSpeed(100),
-            gold(50)
+        const int maxArmors = 10;
+
+        Player() : 
+            x{0.0f},
+            y{0.0f},
+            speed{5.0f},
+            hp{100},
+            maxHp{100},
+            minSpeed{1},
+            maxSpeed{100},
+            gold{50}
         {
             // logic to put nullptr to every armor
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < maxArmors; i++) {
+                armors[i] = nullptr;
+            }
+        }
+
+        Player(float x, float y, float speed, int hp, int maxHp, float minSpeed, float maxSpeed, int gold) : 
+            x{x},
+            y{y},
+            hp{hp},
+            maxHp{maxHp},
+            minSpeed{minSpeed},
+            maxSpeed{maxSpeed},
+            gold{gold}
+        {
+            // same logic both constructors
+            
+            for (int i = 0; i < maxArmors; i++) {
                 armors[i] = nullptr;
             }
         }

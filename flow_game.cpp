@@ -47,16 +47,14 @@ int main() {
     Armor armor = Armor(50, 0.2f);
     hero.equipArmor(armor);
     hero.printArmorStats();
+
+    Armor armor2 = Armor(100, 0.5f);
+    hero.equipArmor(armor2);
     hero.printArmorStats();
 
-
-    //int precioArmadura = 200;
-    /*if(hero.spendMoney(precioArmadura)) {
-        printf("armor buyed! \n");
-        //equipar armadura
-    } else {
-        printf("cant buy armor! \n");
-    }*/
+    Armor armor3 = Armor(60, 0.3f);
+    hero.equipArmor(armor3);
+    hero.printArmorStats();
 
     buyPotion(hero);
     hero.printPlayer();
@@ -75,6 +73,7 @@ int main() {
     hero.printPlayer();
     //printf("Se va a desequipar!! ");
     hero.unequipArmor(0);
+    hero.printArmorStats();
     //printf("Hecho \n");
     fallInLava(hero);
     hero.printPlayer();

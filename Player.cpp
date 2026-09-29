@@ -52,7 +52,7 @@ void Player::equipArmor(Armor armor_to_set) {
 void Player::reasignArmors(int slot_number) {
 
     // do it before logic to delete on memory
-    if (slot_number < 0) { return; }
+    if (slot_number < 0 || slot_number > maxArmors) { return; }
 
     // add logic to delete only
     delete armors[slot_number];
@@ -60,11 +60,14 @@ void Player::reasignArmors(int slot_number) {
     
     for (int i = 0; i < maxArmors; i++) {
 
-        // i dont need to check if it is null because i dont care, i can just move the object between them
-        // if i do i - 1, there is a problem, i need to start on i = 1
+        if (armors[i + 1] == nullptr) { return; };
+
         armors[i] = armors[i + 1];
         armors[i + 1] = nullptr;
     }
+
+    // i dont need to check if it is null because i dont care, i can just move the object between them
+    // if i do i - 1, there is a problem, i need to start on i = 1
 
     /*for (int i = 1; i < maxArmors + 1; i++) {
         armors[i - 1] = armors[i];

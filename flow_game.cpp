@@ -72,7 +72,7 @@ int main() {
     fallInLava(hero);
     hero.printPlayer();
     //printf("Se va a desequipar!! ");
-    hero.unequipArmor(0);
+    hero.unequipArmor(1);
     hero.printArmorStats();
     //printf("Hecho \n");
     fallInLava(hero);

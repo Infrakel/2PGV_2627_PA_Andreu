@@ -60,10 +60,13 @@ void Player::reasignArmors(int slot_number) {
     
     for (int i = 0; i < maxArmors; i++) {
 
-        if (armors[i + 1] == nullptr) { return; };
+        if (armors[i] == nullptr) { 
 
-        armors[i] = armors[i + 1];
-        armors[i + 1] = nullptr;
+            if (armors[i + 1] == nullptr) { return; };
+            
+            armors[i] = armors[i + 1];
+            armors[i + 1] = nullptr;
+        };
     }
 
     // i dont need to check if it is null because i dont care, i can just move the object between them

@@ -18,7 +18,17 @@ void buyPotion(Player& p) {
 }
 
 void fallInLava(Player& p) {
-    p.increaseLife(-150);
+
+    float total_damage = 0;
+
+    for (int i = 0; i < 10; i++) {
+        if (p.getArmor(i) != nullptr) {
+            total_damage = p.getArmor(i)->takeDamageReduction(150);
+            break;
+        }
+    }
+
+    p.increaseLife(-total_damage);
 }
 
 void pickUpBoots(Player& P) {
@@ -37,9 +47,6 @@ int main() {
     Armor armor = Armor(50, 0.2f);
     hero.equipArmor(armor);
     hero.printArmorStats();
-    //printf("Se va a desequipar!! ");
-    hero.unequipArmor(0);
-    //printf("Hecho \n");
     hero.printArmorStats();
 
 
@@ -65,6 +72,10 @@ int main() {
     hero.printPlayer();
 
     fallInLava(hero);
+    hero.printPlayer();
+    //printf("Se va a desequipar!! ");
+    hero.unequipArmor(0);
+    //printf("Hecho \n");
     fallInLava(hero);
     hero.printPlayer();
 

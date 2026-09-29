@@ -2,6 +2,7 @@ class Armor {
     public:
         int getDurability() const;
         float getDamageReduction() const;
+        float takeDamageReduction(float damage);
 
         Armor() : 
             durability(0),

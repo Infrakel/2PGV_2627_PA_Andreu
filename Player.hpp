@@ -16,6 +16,8 @@ class Player {
         void equipArmor(Armor armor_to_set);
         void unequipArmor(int slot_number);
 
+        Armor* getArmor(int slot);
+
         Player(): 
             x(0.0f),
             y(0.0f),

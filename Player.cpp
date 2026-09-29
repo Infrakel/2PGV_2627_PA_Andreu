@@ -19,6 +19,8 @@ void Player::printArmorStats() {
 
 void Player::increaseLife(int change) {
     hp = clamp(0, hp + change, maxHp);
+
+    printf("HP: [%d]   change [%d] \n", hp, change);
 }
 
 void Player::increaseSpeed(int change) {
@@ -51,4 +53,8 @@ void Player::unequipArmor(int slot_number) {
     // delete first, then point to nullptr
     delete armors[slot_number];
     armors[slot_number] = nullptr;
+}
+
+Armor* Player::getArmor(int slot) {
+    return armors[slot];
 }

@@ -1,21 +1,54 @@
 #include "Tictactoe.hpp"
 
-Ficha Tictactoe::winCondition() const {
+bool Tictactoe::winCondition(Ficha currentOne) const {
 
-    Ficha cell = Ficha::Vacio;
+    // logic to stop the game, first horizontal
+    for (int i = 0; i < 3; i++) {
+        if (celdas[i * 3] == currentOne &&
+            celdas[i * 3 + 1] == currentOne &&
+            celdas[i * 3 + 2] == currentOne) {
 
-    return cell;
+            return true;
+        }
+    }
+
+    // seconf vertical
+    for (int k = 0; k < 3; k++) {
+        if (celdas[k] == currentOne &&
+            celdas[k + 3] == currentOne &&
+            celdas[k + 6] == currentOne) {
+
+            return true;
+        }
+    }
+
+    // one rsult too
+    if (celdas[0] == currentOne &&
+        celdas[4] == currentOne &&
+        celdas[8] == currentOne) {
+
+        return true;
+    }
+
+    if (celdas[2] == currentOne &&
+        celdas[4] == currentOne &&
+        celdas[6] == currentOne) {
+
+        return true;
+    } 
+
+    return false;
 }
 
 bool Tictactoe::isGameEnded() const {
 
-    return false;
-}
-        
-Ficha Tictactoe::nextPlayer() const {
-    Ficha cell = Ficha::Vacio;
+    for (int i = 0; i < maxCells; i++) {
+        if (celdas[i] == Ficha::Vacio) {
+            return false;
+        }
+    }
 
-    return cell;
+    return true;
 }
 
 Ficha Tictactoe::getCell(int slot) const {

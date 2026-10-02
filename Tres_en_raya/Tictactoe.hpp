@@ -16,9 +16,8 @@ class Tictactoe {
         };
 
         // OBSERVACION
-        Ficha winCondition() const;
+        bool winCondition(Ficha currentOne) const;
         bool isGameEnded() const;
-        Ficha nextPlayer() const;
         Ficha getCell(int slot) const;
         void assignPosition(int slot, Ficha coin);
 
